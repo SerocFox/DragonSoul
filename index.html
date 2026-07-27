@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dragon Soul — Sangre de Dragón</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=EB+Garamond:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink: #14100d;
+    --parchment: #ece2c6;
+    --wax: #7a1f1f;
+    --wax-dark: #4a0f0f;
+    --amber: #c98a3e;
+    --gold: #cba135;
+    --smoke: #2a2118;
+    --ember: #e0632f;
+    --line: rgba(203,161,53,0.28);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:
+      radial-gradient(ellipse at 20% 0%, rgba(122,31,31,0.18), transparent 45%),
+      radial-gradient(ellipse at 85% 15%, rgba(203,161,53,0.10), transparent 40%),
+      var(--ink);
+    color:var(--parchment);
+    font-family:'Cormorant Garamond', serif;
+    line-height:1.6;
+  }
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px;}
+
+  header.hero{
+    padding:100px 24px 70px;
+    text-align:center;
+    position:relative;
+    border-bottom:1px solid var(--line);
+  }
+  .sigil{
+    width:64px;height:64px;margin:0 auto 28px;
+    opacity:0.9;
+  }
+  .eyebrow{
+    font-family:'EB Garamond', serif;
+    font-style:italic;
+    letter-spacing:0.35em;
+    text-transform:uppercase;
+    font-size:12px;
+    color:var(--gold);
+    margin-bottom:18px;
+  }
+  h1{
+    font-family:'Cinzel Decorative', serif;
+    font-weight:900;
+    font-size:clamp(2.4rem, 6vw, 4rem);
+    margin:0 0 14px;
+    color:var(--parchment);
+    text-shadow: 0 0 30px rgba(224,99,47,0.25);
+    letter-spacing:0.02em;
+  }
+  .hero p.tag{
+    font-size:1.25rem;
+    color:#cbb98f;
+    max-width:480px;
+    margin:0 auto;
+  }
+  .divider{
+    width:120px;height:1px;
+    background:linear-gradient(90deg, transparent, var(--gold), transparent);
+    margin:34px auto;
+  }
+
+  section{padding:64px 24px;border-bottom:1px solid var(--line);}
+  section:last-of-type{border-bottom:none;}
+
+  h2{
+    font-family:'Cinzel Decorative', serif;
+    font-size:1.5rem;
+    color:var(--gold);
+    letter-spacing:0.04em;
+    margin-bottom:26px;
+    text-align:center;
+  }
+  h2 .num{
+    display:block;
+    font-family:'EB Garamond', serif;
+    font-style:italic;
+    font-size:0.85rem;
+    color:var(--ember);
+    letter-spacing:0.3em;
+    text-transform:uppercase;
+    margin-bottom:8px;
+  }
+
+  .lore{
+    font-size:1.15rem;
+    color:#d8cba3;
+    max-width:600px;
+    margin:0 auto;
+    text-align:center;
+  }
+  .lore em{color:var(--parchment);font-style:italic;}
+
+  .facts{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:1px;
+    background:var(--line);
+    border:1px solid var(--line);
+    max-width:600px;
+    margin:0 auto;
+  }
+  .fact{
+    background:var(--smoke);
+    padding:22px 20px;
+  }
+  .fact .k{
+    font-family:'EB Garamond',serif;
+    font-style:italic;
+    font-size:0.78rem;
+    letter-spacing:0.18em;
+    text-transform:uppercase;
+    color:var(--amber);
+    display:block;
+    margin-bottom:6px;
+  }
+  .fact .v{font-size:1.1rem;color:var(--parchment);}
+
+  .variants{
+    max-width:600px;margin:34px auto 0;
+    display:flex;flex-wrap:wrap;gap:14px;justify-content:center;
+  }
+  .variant{
+    border:1px solid var(--line);
+    padding:14px 20px;
+    font-size:0.98rem;
+    color:#d8cba3;
+    background:rgba(122,31,31,0.08);
+  }
+  .variant b{color:var(--parchment);}
+
+  .custom-list{
+    max-width:600px;margin:0 auto;
+    list-style:none;padding:0;
+  }
+  .custom-list li{
+    padding:14px 0;
+    border-bottom:1px dashed var(--line);
+    display:flex;gap:14px;
+    font-size:1.05rem;
+    color:#d8cba3;
+  }
+  .custom-list li:last-child{border-bottom:none;}
+  .custom-list li .icon{color:var(--ember);flex-shrink:0;}
+  .custom-list b{color:var(--parchment);}
+  .note{
+    max-width:600px;margin:26px auto 0;
+    font-family:'EB Garamond',serif;font-style:italic;
+    font-size:0.95rem;color:#a6987a;text-align:center;
+  }
+
+  .order-box{
+    max-width:500px;margin:0 auto;
+    text-align:center;
+  }
+  .price{
+    font-family:'Cinzel Decorative',serif;
+    font-size:3rem;color:var(--gold);
+    margin:6px 0 4px;
+  }
+  .price-note{color:#a6987a;font-size:0.95rem;margin-bottom:36px;}
+  .channels{
+    display:flex;gap:16px;justify-content:center;flex-wrap:wrap;
+  }
+  .channel{
+    border:1px solid var(--gold);
+    color:var(--parchment);
+    text-decoration:none;
+    padding:14px 28px;
+    font-family:'EB Garamond',serif;
+    letter-spacing:0.12em;
+    text-transform:uppercase;
+    font-size:0.85rem;
+    transition:background 0.25s, color 0.25s;
+  }
+  .channel:hover{background:var(--gold);color:var(--ink);}
+
+  .terms{
+    max-width:600px;margin:0 auto;
+    font-family:'EB Garamond',serif;
+    font-size:0.95rem;color:#bcae8c;
+  }
+  .terms h3{
+    font-family:'Cormorant Garamond',serif;
+    font-weight:600;color:var(--parchment);
+    font-size:1.1rem;margin:24px 0 8px;
+  }
+  .terms h3:first-child{margin-top:0;}
+  .terms p{margin:0 0 6px;}
+  .age-gate{
+    max-width:600px;margin:40px auto 0;
+    text-align:center;
+    border:1px solid var(--wax);
+    padding:20px;
+    background:rgba(122,31,31,0.12);
+  }
+  .age-gate b{color:var(--ember);font-family:'Cinzel Decorative',serif;font-size:1.1rem;}
+
+  footer{
+    padding:50px 24px;text-align:center;
+    font-family:'EB Garamond',serif;font-style:italic;
+    color:#7a6b4d;font-size:0.9rem;
+  }
+
+  @media (max-width:520px){
+    .facts{grid-template-columns:1fr;}
+    header.hero{padding:70px 20px 50px;}
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <svg class="sigil" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="32" cy="32" r="30" stroke="#cba135" stroke-width="1"/>
+    <path d="M32 14 L38 30 L54 32 L38 34 L32 50 L26 34 L10 32 L26 30 Z" stroke="#e0632f" stroke-width="1.2" fill="none"/>
+    <circle cx="32" cy="32" r="4" fill="#7a1f1f"/>
+  </svg>
+  <div class="eyebrow">Sangre de Dragón</div>
+  <h1>Dragon&nbsp;Soul</h1>
+  <p class="tag">Un fragmento de alma atrapado en cristal. Licor artesanal de fruta, decorado a mano, pieza única.</p>
+</header>
+
+<section id="lore">
+  <h2><span class="num">Capítulo I</span>El elixir</h2>
+  <p class="lore">
+    Cada botella de <em>Dragon Soul</em> nace de una maceración lenta de fruta sobre vodka,
+    pensada para disfrutarse con calma — un pequeño ritual, no un trago rápido.
+    Se decora a mano, con cera, cadenas y colgantes propios, así que
+    <em>no existen dos botellas idénticas</em>.
+  </p>
+</section>
+
+<section id="ficha">
+  <h2><span class="num">Capítulo II</span>Lo que contiene</h2>
+  <div class="facts">
+    <div class="fact"><span class="k">Base</span><span class="v">Vodka</span></div>
+    <div class="fact"><span class="k">Graduación</span><span class="v">20–25% vol.</span></div>
+    <div class="fact"><span class="k">Sabores</span><span class="v">Fresa · Flor de Jamaica</span></div>
+    <div class="fact"><span class="k">Purpurina</span><span class="v">Uso alimentario</span></div>
+  </div>
+  <div class="variants">
+    <div class="variant"><b>Con alcohol</b> — receta original, 20–25% vol.</div>
+    <div class="variant"><b>Sin alcohol</b> — misma fruta, pensado como pieza decorativa o para quien no bebe</div>
+  </div>
+  <p class="note">
+    En la versión de flor de jamaica, al ser un licor muy oscuro, la purpurina apenas se aprecia a la vista —
+    sigue llevándola por dentro, aunque el brillo se note menos.
+  </p>
+</section>
+
+<section id="personalizacion">
+  <h2><span class="num">Capítulo III</span>Personalización</h2>
+  <ul class="custom-list">
+    <li><span class="icon">◆</span><span><b>Incluido de base:</b> sellado en cera, llavero central y una cadena con piedra colgante.</span></li>
+    <li><span class="icon">◆</span><span><b>A elegir:</b> color de la cera, color/diseño del sello, tipo de colgantes y llaveros adicionales.</span></li>
+    <li><span class="icon">◆</span><span><b>Purpurina:</b> se incluye por defecto — si no la quieres, indícalo en el pedido. También puedes elegir el tono.</span></li>
+    <li><span class="icon">◆</span><span><b>Extras:</b> cualquier detalle fuera de lo básico se habla y se acuerda contigo antes de confirmar.</span></li>
+  </ul>
+</section>
+
+<section id="pedido">
+  <h2><span class="num">Capítulo IV</span>Cómo invocarlo</h2>
+  <div class="order-box">
+    <div class="price">30€</div>
+    <div class="price-note">Envío incluido — y alguna sorpresa que pueda colarse en el paquete.</div>
+    <div class="channels">
+      <a class="channel" href="https://twitter.com/messages/compose" target="_blank" rel="noopener">MD en Twitter</a>
+      <a class="channel" href="https://t.me/" target="_blank" rel="noopener">MD en Telegram</a>
+    </div>
+  </div>
+</section>
+
+<section id="condiciones">
+  <h2><span class="num">Capítulo V</span>Condiciones</h2>
+  <div class="terms">
+    <h3>Qué es esto</h3>
+    <p>Dragon Soul es un obsequio artesanal hecho a mano, en tiradas pequeñas y personalizadas — no un producto de venta comercial regular.</p>
+
+    <h3>Ingredientes y alérgenos</h3>
+    <p>Vodka, fruta macerada (fresa o flor de jamaica), azúcar, purpurina de uso alimentario (opcional). Si tienes alguna alergia o intolerancia, avísalo antes de pedir.</p>
+
+    <h3>Conservación</h3>
+    <p>Guardar en lugar fresco, alejado de la luz directa. No requiere refrigeración.</p>
+
+    <h3>Personalización y plazos</h3>
+    <p>Cada botella es una pieza única hecha bajo pedido; los detalles de decoración se acuerdan por MD antes de confirmar, y el tiempo de preparación puede variar según la personalización elegida.</p>
+
+    <h3>Responsabilidad</h3>
+    <p>Consumo responsable. No recomendado durante el embarazo ni antes de conducir o manejar maquinaria.</p>
+  </div>
+
+  <div class="age-gate">
+    <b>+18</b><br>
+    Las versiones con alcohol solo pueden solicitarse siendo mayor de 18 años.
+  </div>
+</section>
+
+<footer>
+  Dragon Soul — Sangre de Dragón · hecho a mano, botella a botella.
+</footer>
+
+</body>
+</html>
