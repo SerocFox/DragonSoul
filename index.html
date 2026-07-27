@@ -45,10 +45,16 @@
   .hero-img{
     max-width:280px;
     width:60%;
-    margin:0 auto 36px;
+    margin:32px auto 32px;
     border:1px solid var(--line);
     box-shadow:0 20px 50px rgba(0,0,0,0.55);
     display:block;
+    cursor:zoom-in;
+    transition:transform 0.25s ease, box-shadow 0.25s ease;
+  }
+  .hero-img:hover{
+    transform:translateY(-2px);
+    box-shadow:0 24px 60px rgba(0,0,0,0.65);
   }
   .eyebrow{
     font-family:'EB Garamond', serif;
@@ -250,6 +256,42 @@
     color:#7a6b4d;font-size:0.9rem;
   }
 
+  /* Lightbox */
+  .lightbox{
+    position:fixed;
+    inset:0;
+    background:rgba(10,8,6,0.92);
+    display:none;
+    align-items:center;
+    justify-content:center;
+    z-index:1000;
+    padding:40px 20px;
+    cursor:zoom-out;
+  }
+  .lightbox.open{display:flex;}
+  .lightbox img{
+    max-width:min(90vw, 800px);
+    max-height:85vh;
+    border:1px solid var(--gold);
+    box-shadow:0 30px 80px rgba(0,0,0,0.7);
+    cursor:default;
+  }
+  .lightbox-close{
+    position:fixed;
+    top:24px;right:28px;
+    width:42px;height:42px;
+    border:1px solid var(--gold);
+    background:transparent;
+    color:var(--parchment);
+    font-family:'Cormorant Garamond',serif;
+    font-size:1.4rem;
+    line-height:1;
+    cursor:pointer;
+    display:flex;align-items:center;justify-content:center;
+    transition:background 0.2s, color 0.2s;
+  }
+  .lightbox-close:hover{background:var(--gold);color:var(--ink);}
+
   @media (max-width:520px){
     .facts{grid-template-columns:1fr;}
     header.hero{padding:70px 20px 50px;}
@@ -265,10 +307,9 @@
     <circle cx="32" cy="32" r="4" fill="#7a1f1f"/>
   </svg>
   <div class="eyebrow">Sangre de Dragón</div>
-  
   <h1>Dragon&nbsp;Soul</h1>
+  <img class="hero-img" src="img/dragon-soul-promo.png" alt="Botella Dragon Soul decorada a mano, entre velas y libros antiguos" onclick="openLightbox(this.src, this.alt)">
   <p class="tag">Un fragmento de alma atrapado en cristal. Licor artesanal de fruta, decorado a mano, pieza única.</p>
-  <img class="hero-img" src="img/dragon-soul-promo.png" alt="Botella Dragon Soul decorada a mano, entre velas y libros antiguos">
 </header>
 
 <section id="lore">
@@ -311,15 +352,13 @@
 </section>
 
 <!--
-  STOCK
-  STOCK
-  STOCK
-  STOCK
-  STOCK
+  ✏️ PARA ACTUALIZAR EL STOCK:
+  Cambia solo el número/formato dentro de cada <span class="count">...</span> de aquí abajo.
+  Si se agota un sabor, escribe la palabra Agotado y añade la clase "agotado":
+  <span class="count agotado">Agotado</span>
   -->
-  
 <section id="disponibilidad">
-  <h2><span class="num">Capítulo IV</span>Quedan en la cueva</h2>  
+  <h2><span class="num">Capítulo IV</span>Quedan en la cueva</h2>
   <div class="stock">
     <div class="stock-item">
       <span class="flavor">Fresa</span>
@@ -338,9 +377,13 @@
   <div class="order-box">
     <div class="price">30€ <span style="font-size:1.3rem;color:#a6987a;">/ 25€</span></div>
     <div class="price-note">30€ para la versión con fruta y alcohol · 25€ para la versión solo decorativa.<br>Envío incluido — y alguna sorpresa que pueda colarse en el paquete.</div>
+    <!--
+      ✏️ PARA CAMBIAR LOS ENLACES DE CONTACTO:
+      Sustituye solo lo que está entre comillas después de href=
+    -->
     <div class="channels">
       <a class="channel" href="https://x.com/SerocFox" target="_blank" rel="noopener">MD en Twitter</a>
-      <a class="channel" href="https://t.me/SerocFox"_blank" rel="noopener">MD en Telegram</a>
+      <a class="channel" href="https://t.me/SerocFox" target="_blank" rel="noopener">MD en Telegram</a>
     </div>
     <p class="avail-note" style="margin-top:22px;">Los pedidos se atienden por orden de llegada, según disponibilidad. Las botellas ya hechas se envían en ~1 semana + envío.</p>
   </div>
@@ -371,7 +414,7 @@
     <p>Consumo responsable. No recomendado durante el embarazo ni antes de conducir o manejar maquinaria.</p>
 
     <h3>Pago</h3>
-    <p>El pago se realizará la mitad al pedirlo y la otra mitad en su finalización (antes del envío) por paypal o bizzum.</p>
+    <p>El pago se realiza mitad al pedirlo y mitad al finalizarlo (antes del envío), por PayPal o Bizum.</p>
   </div>
 
   <div class="age-gate">
@@ -383,6 +426,29 @@
 <footer>
   Dragon Soul — SerocFox · hecho a mano, botella a botella.
 </footer>
+
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+  <button class="lightbox-close" onclick="closeLightbox(); event.stopPropagation();">✕</button>
+  <img id="lightbox-img" src="" alt="">
+</div>
+
+<script>
+  function openLightbox(src, alt){
+    const lb = document.getElementById('lightbox');
+    const img = document.getElementById('lightbox-img');
+    img.src = src;
+    img.alt = alt;
+    lb.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeLightbox(){
+    document.getElementById('lightbox').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  document.addEventListener('keydown', function(e){
+    if(e.key === 'Escape') closeLightbox();
+  });
+</script>
 
 </body>
 </html>
